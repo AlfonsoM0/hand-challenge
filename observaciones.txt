@@ -1,0 +1,141 @@
+Hola! Soy Alfonso.M0
+
+Soy estudiante de programación en un Bootcamp hace 2 meses. Debido a mi poca experiencia, pasaré a resolver el problema empezando por el siguiente pseudo-código.
+
+=>          HPL                      | Letra | ASCII decimal
+👇 |🤜👇👇👇👇👇👇👇👉👆👈🤛| 👉👇👊    = H   =     72
+
+👇 |🤜👇👉👆👆👆👆👆👈🤛| 👉👆👆👊      = e   =     101
+
+👆👆👆👆👆👆👆👊                         = l   =     108
+
+👊                                     = l   =     108
+
+👆👆👆👊                                = o   =     111
+
+
+------------------------------ H? ------------------------------
+Obs 1:
+  Caracteres imprimibles ASCII 
+  (https://es.wikipedia.org/wiki/ASCII o https://elcodigoascii.com.ar/)
+
+  Letra     binario    decimal
+    H    = 0100 1000 =   72
+
+
+Obs 2:
+  Tamaño de bytes indefinidos, pero comienza en 0.
+  (https://es.wikipedia.org/wiki/Byte#:~:text=Un%20byte%20es%20una%20unidad,el%20que%20ha%20sido%20definido.)
+  Si los bytes son no definidos, usamos solo la guía decimal (el 72 para la "H").
+
+Obs 3: 
+  Hay un bucle que mantiene los valores entre 0 y 255.
+
+Obs 4:
+  e = 101
+  l = e + 7👆 = 108
+  o = l + 3👆 = 111
+
+Obs 5:
+  ¿Qué es la célula de memoria?
+  El HPL usa un espacio de memoria donde acumula el valor deseado, luego lo selecciona e imprime.
+
+
+
+
+La búsqueda del carácter 72 mediante las siguiente instrucciones.
+  👇 memoria -1 (el valor debe mantenerse entre 0 y 255)
+
+  🤜 célula de memoria === 0? saltar a siguiente : no saltear;
+    👇 memoria -1
+    👇 memoria -1
+    👇 memoria -1
+    👇 memoria -1
+    👇 memoria -1
+    👇 memoria -1
+    👇 memoria -1
+    👉 memoria mueve a la siguiente célula
+    👆 memoria +1
+    👈 memoria mueve a la anterior célula
+  🤛 célula de memoria !== 0? saltar a inicio : no saltear;
+
+  👉 memoria mueve a la siguiente célula
+  👇 memoria -1
+  👊 imprir letra
+
+
+PROCESO DE BÚSQUEDA
+  El objetivo es imprimir el 72, la "H".
+  >_ Comienza con memoria = 0.
+  1  👇 = -1 => cambia a = 255
+
+  2  🤜 actual 255, no es igual a 0, no saltea.
+  3    👇 = 254
+  4    👇 = 253
+  5    👇 = 252
+  6    👇 = 251
+  7    👇 = 250
+  8    👇 = 249
+  9    👇 = 248
+  10   👉 = 248, 0* (inicio de la letra "H", *= posición actual)
+  11   👆 = 248, 1*
+  12   👈 = 248*, 1
+  3  🤛 actual 248, no es igual a cero, salta atrás para seguir restando, bucle.
+     ver Obs 6.
+
+  👉 = 0, 73*
+  👇 = 0, 72* = "H"
+  👊 imprime 72 = "H"
+
+Obs 6:
+  ¿Cuántas veces debe hacer el bucle?
+  Hasta que 248 llegue a 0, momento en el cual 1 aumentará hasta 73.
+
+  En este momento hay 2 índices.
+    Índice 0 debe pasar de 248 a 0.
+    Índice 1 debe pasar de 1 a 73.
+
+
+------------------------------ e? ------------------------------
+PROCESO DE BÚSQUEDA
+  >_ Comienza con memoria = 0, 72*
+  👇 = 0, 71*
+
+  🤜 actual 71, no es igual a 0, no saltea.
+    👇 = 0, 70*
+    👉 = 0, 70, 0*
+    👆 = 0, 70, 1*
+    👆 = 0, 70, 2*
+    👆 = 0, 70, 3*
+    👆 = 0, 70, 4*
+    👆 = 0, 70, 5*
+    👈 = 0, 70*, 5
+  🤛 bucles hasta que 70 sea 0.
+
+  👉 = 0, 0, 99*
+  👆 = 0, 0, 100*
+  👆 = 0, 0, 101*
+  👊 imprime 101 = "e"
+
+
+------------------------------ ll? ------------------------------
+PROCESO DE BÚSQUEDA
+  >_ memoria = 0, 0, 101*
+  👆 = 0, 0, 102*
+  👆 = 0, 0, 103*
+  👆 = 0, 0, 104*
+  👆 = 0, 0, 105*
+  👆 = 0, 0, 106*
+  👆 = 0, 0, 107*
+  👆 = 0, 0, 108*
+  👊 = imprime 108 = "l"
+  👊 = imprime 108 = "l"
+
+
+------------------------------ o? ------------------------------
+PROCESO DE BÚSQUEDA
+  >_ memoria = 0, 0, 108*
+  👆 = 0, 0, 109*
+  👆 = 0, 0, 110*
+  👆 = 0, 0, 111*
+  👊 = imprime 111 = "o"

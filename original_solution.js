@@ -1,6 +1,10 @@
+//Code not writen by me.
+
 const fs = require('fs');
 
-const instructions = [...fs.readFileSync(process.argv[2] || 'input.hand', 'utf-8')];
+const instructions = [
+  ...fs.readFileSync(process.argv[2] || 'input.hand', 'utf-8'),
+];
 let cursor = 0;
 const data = [0];
 let pointer = 0;
@@ -24,9 +28,9 @@ const actions = {
       data.push(0);
     }
   },
-  '👈': () => pointer -= 1,
-  '👆': () => data[pointer] = data[pointer] === 255 ? 0 : data[pointer] + 1,
-  '👇': () => data[pointer] = data[pointer] === 0 ? 255 : data[pointer] - 1,
+  '👈': () => (pointer -= 1),
+  '👆': () => (data[pointer] = data[pointer] === 255 ? 0 : data[pointer] + 1),
+  '👇': () => (data[pointer] = data[pointer] === 0 ? 255 : data[pointer] - 1),
   '👊': () => process.stdout.write(String.fromCharCode(data[pointer])),
   '🤜': () => {
     if (data[pointer] === 0) {
@@ -38,12 +42,10 @@ const actions = {
       cursor = loops[cursor];
     }
   },
-}
+};
 
 while (cursor < instructions.length) {
   const instruction = instructions[cursor];
   actions[instruction]();
   cursor += 1;
 }
-
-
