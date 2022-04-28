@@ -14,13 +14,13 @@ let cell = 0;
 
 // loops control
 const starts = [];
-const loops = {};
+const loops = new Map();
 instructions.forEach((instruction, index) => {
   if (instruction === '🤜') starts.push(index);
   else if (instruction === '🤛') {
     let start = starts.pop();
-    loops[start] = index;
-    loops[index] = start;
+    loops.set(start, index);
+    loops.set(index, start);
   }
 });
 
@@ -34,10 +34,10 @@ const execute = {
   },
   '👈': () => --cell,
   '🤜': () => {
-    if (memory[cell] === 0) protocol = loops[protocol];
+    if (memory[cell] === 0) protocol = loops.get(protocol);
   },
   '🤛': () => {
-    if (memory[cell] !== 0) protocol = loops[protocol];
+    if (memory[cell] !== 0) protocol = loops.get(protocol);
   },
   '👊': () => ASCII.push(memory[cell]),
 };
